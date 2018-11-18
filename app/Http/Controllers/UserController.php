@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+   public function __construct()
+   {
+       //调用中间件，保护登录注册（已经登录用户不允许再访问登录注册）
+       $this->middleware('guest',['only'=>[
+           'logon','register','loginFrom','store','passwordReset','passwordResetFrom'
+       ],]);
+   }
+
     public function register(){
         return view('user.register');
     }
@@ -33,7 +41,7 @@ class UserController extends Controller
             'password.min'=>'密码不得少于3位置'
         ]);
         $credentials=$request->only('email','password');
-        if(\Auth::attempt($credentials)){
+        if(\Auth::attempt($credentials,$request->remember)){
             return redirect()->route('home')->with('success','登陆成功');
         }
             return redirect()->back()->with('danger','用户名密码不正确');
