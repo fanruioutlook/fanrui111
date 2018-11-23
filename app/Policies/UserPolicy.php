@@ -81,4 +81,16 @@ class UserPolicy
     {
         //
     }
+    //判断你点击的用户是否是登录用户，来定进入个人中心修改编辑的权限
+    public function isMine(User $user, User $model)
+    {
+        return $user->id == $model->id;
+
+    }
+//检测登录用户指定用户不是一个人,点自己的文章进去就不会有关注，如果关注了就等于自己关注自己，这样是不对的
+public function isNotMine(User $user,User $model){
+        return $user->id != $model->id;
+
+}
+
 }

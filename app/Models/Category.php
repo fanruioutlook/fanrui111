@@ -9,4 +9,9 @@ class Category extends Model
     protected $fillable=[
         'title','icon'
     ];
+    //关联文章
+    public function article(){
+
+        return $this->hasMany(Article::class);
+    }
 }

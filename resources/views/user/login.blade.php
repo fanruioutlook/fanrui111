@@ -36,7 +36,7 @@
             </p>
 
             <!-- Form -->
-            <form method="post" action="{{route('login')}}">
+            <form method="post" action="{{route('login',['from'=>Request::query('from')])}}">
                 @csrf
                 <div class="form-group">
                     <!-- Label -->

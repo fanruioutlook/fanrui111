@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
+//$categories = Category::all();//获取categories表所有数据
         $categories=Category::paginate(5);
         return view('admin.category.index',compact('categories'));
     }

@@ -108,7 +108,7 @@
             //按钮
             el: '#bt',
             //后台链接
-            url: '{{route('code.send')}}',
+            url: '{{route('util.code.send')}}',
             //验证码等待发送时间
             timeout: 10,
             //表单，手机号或邮箱的INPUT表单

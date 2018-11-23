@@ -22,7 +22,9 @@ class CategoryRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {      //request.php里有route方法，这里是调用父类里面的方法
+        //接受路由参数
+        //dd($this->route('category'));
         $id=$this->route('category')? $this->route('category')->id:null;
         return [
         'title'=>'required|unique:categories,title,'.$id,

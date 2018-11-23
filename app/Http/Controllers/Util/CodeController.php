@@ -24,9 +24,12 @@ class CodeController extends Controller
             $code=$this->random();
 
 //            user模型对象
+            //验证码的下标就叫username，来源不一样
             $user=User::firstOrNew(['email'=>$request->username]);
+//            dd($request->username);
             $user->notify(new RegisterNotify($code));
             session()->put('code',$code);
+//            dd(session()->put('code',$code));
             return ['code'=>1,'message'=>'验证码发送成功'];
 
 

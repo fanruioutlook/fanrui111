@@ -18,6 +18,9 @@ class AdminAuthMiddleware
         if(!auth()->check() || auth()->user()->is_admin!=1){
            return redirect()->route('home');
         }
+//        dd($next);
+//        dd($request);
         return $next($request);
+
     }
 }

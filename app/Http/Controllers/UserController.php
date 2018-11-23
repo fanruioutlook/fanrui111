@@ -42,7 +42,11 @@ class UserController extends Controller
         ]);
         $credentials=$request->only('email','password');
         if(\Auth::attempt($credentials,$request->remember)){
-            return redirect()->route('home')->with('success','登陆成功');
+            if($request->from) {
+                return redirect($request->from)->with('success', '登录成功');
+            }
+            return redirect()->route('home')->with('success','登录成功');
+
         }
             return redirect()->back()->with('danger','用户名密码不正确');
 
@@ -52,7 +56,9 @@ class UserController extends Controller
         return view('user.password_reset');
     }
     public function passwordResetFrom(PasswordResetRequest $request){
+//打印出符合条件的一条数据
         $user=User::where('email',$request->email)->first();
+
         if($user){
             $user->password=bcrypt($request->password);
             $user->save();
